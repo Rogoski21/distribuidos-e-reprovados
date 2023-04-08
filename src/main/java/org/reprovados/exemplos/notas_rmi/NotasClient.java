@@ -1,3 +1,5 @@
+package org.reprovados.exemplos.notas_rmi;
+
 import java.rmi.Naming;
 
 public class NotasClient {

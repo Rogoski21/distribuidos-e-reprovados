@@ -1,3 +1,5 @@
+package org.reprovados.exemplos.add_rmi;
+
 import java.rmi.Naming;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;

@@ -1,3 +1,5 @@
+package org.reprovados.exemplos.hello_rmi;
+
 import java.rmi.Naming;
 
 class HelloClient {

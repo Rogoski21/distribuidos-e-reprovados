@@ -1,3 +1,5 @@
+package org.reprovados.exemplos.notas_rmi;
+
 // Arquivo: Notas.java (Roland Teodorowitsch; 28 ago. 2013)
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;

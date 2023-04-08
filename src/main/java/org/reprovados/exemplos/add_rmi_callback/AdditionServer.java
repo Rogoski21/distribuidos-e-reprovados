@@ -1,7 +1,9 @@
+package org.reprovados.exemplos.add_rmi_callback;
+
 import java.rmi.Naming;
 import java.rmi.RemoteException;
-import java.rmi.server.UnicastRemoteObject;
 import java.rmi.registry.LocateRegistry;
+import java.rmi.server.UnicastRemoteObject;
 
 public class AdditionServer extends UnicastRemoteObject implements AdditionInterfaceServer {
 	private static volatile int result;
