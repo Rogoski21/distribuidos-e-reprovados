@@ -1,5 +1,6 @@
 package org.reprovados.entrega;
 
+import java.io.IOException;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 
@@ -8,12 +9,12 @@ public interface OperationInterface extends Remote {
 
     // Escritas deverão são mutualmente exclusivas
     // Podem ocorrer em paralelo com leituras
-    void write() throws RemoteException;
+    void write() throws IOException;
 
     // Deleções devem ser mutualmente exclusivas
     // Não podem ocorrer em paralelo com nenhuma outra operação
-    void delete() throws RemoteException;
+    void delete() throws IOException;
 
     // Podem ocorrer diversas leituras concorrentemente
-    void read() throws RemoteException;
+    void read() throws IOException;
 }
