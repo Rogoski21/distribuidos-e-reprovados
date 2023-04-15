@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.rmi.Naming;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.time.LocalDateTime;
@@ -21,30 +22,61 @@ public class Operation extends UnicastRemoteObject implements OperationInterface
 
     @Override
     public void write() throws IOException {
-        saveLog("write");
+        String connectLocation = "rmi://" + "localhost" + ":8000/file";
+        FileLockInterface fileLockInterface = null;
+        try {
+            System.out.println("Connecting to: " + connectLocation);
+            fileLockInterface = (FileLockInterface) Naming.lookup(connectLocation);
+        } catch (Exception e) {
+            System.out.println("Client failed: ");
+            e.printStackTrace();
+        }
+
+        try {
+            fileLockInterface.write();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void delete() throws IOException {
-        saveLog("delete");
+        String connectLocation = "rmi://" + "localhost" + ":8000/file";
+        FileLockInterface fileLockInterface = null;
+        try {
+            System.out.println("Connecting to: " + connectLocation);
+            fileLockInterface = (FileLockInterface) Naming.lookup(connectLocation);
+        } catch (Exception e) {
+            System.out.println("Client failed: ");
+            e.printStackTrace();
+        }
+
+        try {
+            fileLockInterface.delete();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void read() throws IOException {
-        saveLog("read");
+        String connectLocation = "rmi://" + "localhost" + ":8000/file";
+        FileLockInterface fileLockInterface = null;
+        try {
+            System.out.println("Connecting to: " + connectLocation);
+            fileLockInterface = (FileLockInterface) Naming.lookup(connectLocation);
+        } catch (Exception e) {
+            System.out.println("Client failed: ");
+            e.printStackTrace();
+        }
+
+        try {
+            fileLockInterface.read();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
     }
-
-    private void saveLog(String operation) throws IOException {
-        //Salva um log descrevendo a operação com linha em arquivo
-        BufferedWriter outStream = new BufferedWriter(new FileWriter("src/main/java/org/reprovados/entrega/logs.txt", true));
-
-        LocalDateTime localDateTime = LocalDateTime.now();
-
-        outStream.write("(" + localDateTime + ") " + "Operation " + operation + " occurred successfully\n ");
-
-        outStream.close();
-
-        System.out.println("Successfully saved");
-    }
-
 }

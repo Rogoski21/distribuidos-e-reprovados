@@ -1,2 +1,3 @@
-(2023-04-09T18:08:28.231997) Operation write occurred successfully
+(2023-04-15T16:36:05.956729400) Operation Delete Initiated occurred successfully
+ (2023-04-15T16:36:15.971909800) Operation Delete Finished occurred successfully
  

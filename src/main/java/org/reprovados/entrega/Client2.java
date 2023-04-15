@@ -1,13 +1,9 @@
 package org.reprovados.entrega;
 
-import org.reprovados.entrega.OperationInterface;
-
 import java.io.IOException;
 import java.rmi.Naming;
-import java.rmi.RemoteException;
-import java.util.Random;
 
-public class Client {
+public class Client2 {
     public static void main(String[] args) {
 
         if (args.length != 1) {
@@ -16,7 +12,7 @@ public class Client {
         }
 
         String remoteHostName = args[0];
-        String connectLocation = "rmi://" + remoteHostName + ":1100/operation";
+        String connectLocation = "rmi://" + remoteHostName + ":1103/operation";
 
         OperationInterface operation = null;
         try {
@@ -28,7 +24,7 @@ public class Client {
         }
 
         try {
-            operation.read();
+            operation.delete();
 
             System.out.println("Client successfully written");
 
