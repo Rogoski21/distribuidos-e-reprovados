@@ -17,7 +17,7 @@ public class FileLock extends UnicastRemoteObject implements FileLockInterface {
     }
 
     @Override
-    public void write() throws IOException {
+    public synchronized void write() throws IOException {
         try {
             while(isDeleting) {
                 wait();
@@ -28,13 +28,14 @@ public class FileLock extends UnicastRemoteObject implements FileLockInterface {
             Thread.sleep(200);
             saveLog("Write Finished");
             isWriting = false;
+            notifyAll();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
     }
 
     @Override
-    public void delete() throws IOException {
+    public synchronized void delete() throws IOException {
         try {
             while(isWriting || isReading) {
                 wait();
@@ -44,6 +45,7 @@ public class FileLock extends UnicastRemoteObject implements FileLockInterface {
             saveLog("Delete Initiated");
             Thread.sleep(10000);
             saveLog("Delete Finished");
+            notifyAll();
             isDeleting = false;
         } catch (InterruptedException e) {
             e.printStackTrace();
@@ -51,7 +53,7 @@ public class FileLock extends UnicastRemoteObject implements FileLockInterface {
     }
 
     @Override
-    public void read() throws IOException {
+    public synchronized void read() throws IOException {
         try {
             while(isDeleting) {
                 wait();
@@ -61,6 +63,7 @@ public class FileLock extends UnicastRemoteObject implements FileLockInterface {
             saveLog("Read Initiated");
             Thread.sleep(15000);
             saveLog("Read Finished");
+            notifyAll();
             isReading = false;
         } catch (InterruptedException e) {
             e.printStackTrace();

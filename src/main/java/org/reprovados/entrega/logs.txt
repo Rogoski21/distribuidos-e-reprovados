@@ -1,3 +1,3 @@
-(2023-04-15T16:36:05.956729400) Operation Delete Initiated occurred successfully
- (2023-04-15T16:36:15.971909800) Operation Delete Finished occurred successfully
+(2023-04-15T16:57:40.729923500) Operation Delete Initiated occurred successfully
+ (2023-04-15T16:57:50.737398400) Operation Delete Finished occurred successfully
  

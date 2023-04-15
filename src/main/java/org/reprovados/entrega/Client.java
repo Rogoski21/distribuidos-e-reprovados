@@ -16,7 +16,7 @@ public class Client {
         }
 
         String remoteHostName = args[0];
-        String connectLocation = "rmi://" + remoteHostName + ":1100/operation";
+        String connectLocation = "rmi://" + remoteHostName + ":1104/operation";
 
         OperationInterface operation = null;
         try {
