@@ -9,12 +9,12 @@ public interface OperationInterface extends Remote {
 
     // Escritas deverão são mutualmente exclusivas
     // Podem ocorrer em paralelo com leituras
-    void write() throws IOException;
+    void write(String source) throws IOException;
 
     // Deleções devem ser mutualmente exclusivas
     // Não podem ocorrer em paralelo com nenhuma outra operação
-    void delete() throws IOException;
+    void delete(String source) throws IOException;
 
     // Podem ocorrer diversas leituras concorrentemente
-    void read() throws IOException;
+    void read(String source) throws IOException;
 }

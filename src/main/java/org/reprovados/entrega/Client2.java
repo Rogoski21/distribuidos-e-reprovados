@@ -2,6 +2,7 @@ package org.reprovados.entrega;
 
 import java.io.IOException;
 import java.rmi.Naming;
+import java.util.Random;
 
 public class Client2 {
     public static void main(String[] args) {
@@ -11,8 +12,9 @@ public class Client2 {
             System.exit(1);
         }
 
+        Random random = new Random();
         String remoteHostName = args[0];
-        String connectLocation = "rmi://" + remoteHostName + ":1105/operation";
+        String connectLocation = "rmi://" + remoteHostName + ":1099/operation";
 
         OperationInterface operation = null;
         try {
@@ -24,10 +26,23 @@ public class Client2 {
         }
 
         try {
-            operation.delete();
+            int counter = 0;
 
-            System.out.println("Client successfully written");
+            while (counter < 20) {
+                int randomNumber = random.nextInt(100);
 
+                if (randomNumber <= 10) {
+                    operation.delete("Client 2");
+                    System.out.println("Client successfully deleted");
+                } else if (randomNumber <= 50) {
+                    operation.write("Client 2");
+                    System.out.println("Client successfully writed");
+                } else {
+                    operation.read("Client 2");
+                    System.out.println("Client successfully readed");
+                }
+                counter++;
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }

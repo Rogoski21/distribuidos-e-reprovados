@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.rmi.Remote;
 
 public interface FileLockInterface extends Remote {
-    void write() throws IOException;
-    void delete() throws IOException;
-    void read() throws IOException;
+    void write(String source) throws IOException;
+    void delete(String source) throws IOException;
+    void read(String source) throws IOException;
 }
