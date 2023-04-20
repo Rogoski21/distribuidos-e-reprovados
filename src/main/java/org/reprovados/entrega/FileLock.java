@@ -17,9 +17,14 @@ public class FileLock extends UnicastRemoteObject implements FileLockInterface {
     }
 
     @Override
-    public void write(String source) throws IOException {
+    public int write(String source) throws IOException {
+        int counter = 0;
         try {
-            while(isDeleting || isWriting) {
+            while(counter < 12) {
+                counter++;
+                if (counter == 10) {
+                    return -1;
+                }
                 Thread.sleep(100);
             }
             isWriting = true;
@@ -28,13 +33,15 @@ public class FileLock extends UnicastRemoteObject implements FileLockInterface {
             Thread.sleep(3000);
             saveLog("Write Finished", source);
             isWriting = false;
+            return 1;
         } catch (InterruptedException e) {
             e.printStackTrace();
+            return -1;
         }
     }
 
     @Override
-    public void delete(String source) throws IOException {
+    public int delete(String source) throws IOException {
         try {
             while(readingOperations > 0 || isDeleting || isWriting) {
                 Thread.sleep(100);
@@ -45,14 +52,16 @@ public class FileLock extends UnicastRemoteObject implements FileLockInterface {
             Thread.sleep(2000);
             saveLog("Delete Finished", source);
             isDeleting = false;
+            return 1;
 
         } catch (InterruptedException e) {
             e.printStackTrace();
+            return -1;
         }
     }
 
     @Override
-    public void read(String source) throws IOException {
+    public int read(String source) throws IOException {
         try {
             while(isDeleting) {
                 Thread.sleep(100);
@@ -63,8 +72,10 @@ public class FileLock extends UnicastRemoteObject implements FileLockInterface {
             Thread.sleep(100);
             saveLog("Read Finished", source);
             readingOperations--;
+            return 1;
         } catch (InterruptedException e) {
             e.printStackTrace();
+            return -1;
         }
     }
 

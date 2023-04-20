@@ -21,7 +21,7 @@ public class Operation extends UnicastRemoteObject implements OperationInterface
     }
 
     @Override
-    public void write(String source) throws IOException {
+    public int write(String source) throws IOException {
         String connectLocation = "rmi://" + "localhost" + ":8000/file";
         FileLockInterface fileLockInterface = null;
         try {
@@ -33,15 +33,16 @@ public class Operation extends UnicastRemoteObject implements OperationInterface
         }
 
         try {
-            fileLockInterface.write(source);
+            return fileLockInterface.write(source);
         }
         catch (Exception e) {
             e.printStackTrace();
+            return -1;
         }
     }
 
     @Override
-    public void delete(String source) throws IOException {
+    public int delete(String source) throws IOException {
         String connectLocation = "rmi://" + "localhost" + ":8000/file";
         FileLockInterface fileLockInterface = null;
         try {
@@ -53,15 +54,16 @@ public class Operation extends UnicastRemoteObject implements OperationInterface
         }
 
         try {
-            fileLockInterface.delete(source);
+            return fileLockInterface.delete(source);
         }
         catch (Exception e) {
             e.printStackTrace();
+            return -1;
         }
     }
 
     @Override
-    public void read(String source) throws IOException {
+    public int read(String source) throws IOException {
         String connectLocation = "rmi://" + "localhost" + ":8000/file";
         FileLockInterface fileLockInterface = null;
         try {
@@ -73,10 +75,11 @@ public class Operation extends UnicastRemoteObject implements OperationInterface
         }
 
         try {
-            fileLockInterface.read(source);
+            return fileLockInterface.read(source);
         }
         catch (Exception e) {
             e.printStackTrace();
+            return -1;
         }
     }
 }
